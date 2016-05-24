@@ -1,12 +1,10 @@
 var username = "";
 var stepdelay = undefined;
 var topretweets = 0;
-var superInterval = null;
 var index = 0;
 
 function retweetThis() {
     setTimeout(function () {
-        console.log("reached");
         var like_links = document.querySelectorAll('i.icon.icon-search');
         like_links[0].click();
         var searchtext = document.querySelectorAll('input.js-app-search-input.search-input.is-focused');
@@ -17,7 +15,6 @@ function retweetThis() {
         var button = document.querySelectorAll('button.js-toggle-button.btn.js-toggle-users');
         var eo = button[0];
         eo.click();
-        console.log(eo);
         setTimeout(function () {
             document.querySelector('.padding-t--7 > div:nth-child(2) > a:nth-child(2) > b:nth-child(1)').click();
             var likes = document.querySelectorAll('i.icon.icon-favorite');
