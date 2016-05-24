@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/popup.css">
+
+</head>
+<body>
+	<section class="hidden">
+		<strong>Auto Retweet Queue</strong>
+		<table class="table">
+			<thead>
+				<tr>
+					<th> <input id="all" type="checkbox"> </th>
+					<th>Auto Retweet page link</th>
+				</tr>
+			</thead>
+		</table>
+		<div id="table-container"> 
+			<table class="table">
+				<tbody id="queue">
+				</tbody>
+			</table>
+		</div>
+		<table class="table"> 
+			<tfoot>
+				<tr>
+					<td colspan="2">
+						<button class="btn" id="delete" style="float:right;"> Delete Selected </button>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</section>
+	<section class="hidden">
+		<p> <strong>Add links</strong> </p>
+		<textarea id="links" style="width: 460px"></textarea> <br/>
+		<button type="button" class="btn btn-primary" id="add">Add to Queue</button>	
+	</section>
+    <section>
+		<strong>Settings</strong>
+		<div style="padding-bottom: 15px;">
+            <p> <label>User Name: </label> <input type="text" id="user_name" placeholder="Username"></p>
+            <p>
+            <label>Timer: </label> <input type="text" id="step_delay"> minutes
+            <br>
+            <button class="btn btn-default" id="time_preset_30">1/2 hour</button>
+            <button class="btn btn-default" id="time_preset_60">1 hour</button>
+            <button class="btn btn-default" id="time_preset_120">2 hours</button>
+            </p>
+            <p> <label>No. of likes to RT: </label> <input type="text" id="top_retweets"></p>
+			<p> <button class="btn btn-info btn-large" id="start"> Start </button> </p>
+		</div>
+    </section>
+</body>
+<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+<script type="text/javascript" src="js/popup.js"></script>
+</html>
