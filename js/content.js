@@ -23,8 +23,10 @@ function retweetThis() {
             setTimeout(function () {
                 var retweetclass = document.querySelector('div.js-modal-panel.mdl.s-tall-fixed.is-inverted-dark');
                 var retweet = retweetclass.querySelectorAll('i.icon.icon-retweet.icon-retweet-toggle.txt-right');
-                if (retweet[index])
+                if (retweet[index]) {
                     retweet[index].click();
+                    retweet[index].click();
+                }
                 setTimeout(function () {
                     var selectall = document.querySelectorAll('li.acc-twitter.js-account-item.js-show-tip');
                     for (var i = 0; i < selectall.length; i++) {
@@ -45,7 +47,7 @@ function retweetThis() {
                         setTimeout(function(){retweetThis();}, stepdelay*60*1000);
                     }
                 }, 3000);
-            }, 2000);
+            }, 3000);
         }, 4000);
     }, 5000);
 }
