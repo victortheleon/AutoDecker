@@ -1,5 +1,6 @@
 var username = "";
 var stepdelay = undefined;
+var app_state = undefined;
 var topretweets = 0;
 var index = 0;
 
@@ -29,40 +30,35 @@ function retweetThis() {
                 }
                 setTimeout(function () {
                     var selectall = document.querySelectorAll('li.acc-twitter.js-account-item.js-show-tip');
-                    for (var i = 0; i < selectall.length; i++) {
-                        if (selectall[i].className != "acc-twitter js-account-item js-show-tip acc-selected")
-                            try {
-                                selectall[i].click();
-                            } catch (error) {
-
-                            }
+                    if(selectall.length > 1) {
+                        for (var i = 1; i < selectall.length; i++) {
+                            if (selectall[i].className != "acc-twitter js-account-item js-show-tip acc-selected")
+                                try {
+                                    selectall[i].click();
+                                } catch (error) {
+                                    console.log(error);
+                                }
+                        }
                     }
                     var retweet_done = document.querySelectorAll('button.js-action-button.js-retweet-button.btn.btn-positive');
                     retweet_done[0].click();
                     index++;
-                    if (index < topretweets) {
-                        retweetThis();
-                    } else {
-                        index = 0;
-                        setTimeout(function(){retweetThis();}, stepdelay*60*1000);
+                    if(index >= topretweets){
+                        index = 0
                     }
+                    setTimeout(function(){retweetThis();}, stepdelay*60*1000);
                 }, 3000);
             }, 3000);
         }, 4000);
     }, 5000);
 }
 
-chrome.storage.local.get(["username", "stepdelay", "topretweets"], function (result) {
+chrome.storage.local.get(["username", "stepdelay", "topretweets", "app_state"], function (result) {
     username = result.username;
     stepdelay = result.stepdelay;
     topretweets = result.topretweets;
-    if (username && stepdelay && topretweets) {
+    app_state = result.app_state;
+    if (username && stepdelay && topretweets && app_state) {
         retweetThis(username);
-    }
-});
-
-chrome.runtime.onMessage.addListener(function (message, sender, response) {
-    if (message.action == "reload") {
-        window.location.reload();
     }
 });

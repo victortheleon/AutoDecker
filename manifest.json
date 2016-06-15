@@ -13,11 +13,13 @@
   "manifest_version": 2,
   "name": "Auto Decker",
   "permissions": [ "<all_urls>", "tabs", "storage" ],
-  "version": "1.0.2",
+  "version": "1.0.4",
   "content_scripts": [
     {
       "matches": ["https://tweetdeck.twitter.com/*"],
-      "js": ["js/jquery-1.12.4.min.js", "js/content.js"]
+      "js": ["js/jquery-1.12.4.min.js", "js/bootstrap.min.js", "js/jquery.toaster.js", "js/content.js"],
+      "css": ["css/bootstrap.min.css", "css/bootstrap-theme.min.css"],
+      "run_at": "document_end"
     }
   ]
 }
