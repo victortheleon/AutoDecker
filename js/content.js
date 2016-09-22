@@ -6,18 +6,11 @@ var index = 0;
 
 function retweetThis() {
     setTimeout(function () {
-        var like_links = document.querySelectorAll('i.icon.icon-search');
-        like_links[0].click();
-        var searchtext = document.querySelectorAll('input.js-app-search-input.search-input.is-focused');
-        searchtext[0].value = username;
-        var search = document.querySelectorAll('a.js-perform-search.txt-base-medium.search-input-perform-search');
-        var en = search[1];
-        en.click();
-        var button = document.querySelectorAll('button.js-toggle-button.btn.js-toggle-users');
-        var eo = button[0];
-        eo.click();
+        var divs = document.querySelectorAll('div.js-column-holder.column-holder');
+        var divToAct = divs[0].getElementsByTagName('div')[0];
+        divToAct.innerHTML = getClicker(username) + divToAct.innerHTML;
+        divToAct.getElementsByTagName('a')[0].click();
         setTimeout(function () {
-            document.querySelector('.padding-t--7 > div:nth-child(2) > a:nth-child(2) > b:nth-child(1)').click();
             var likes = document.querySelectorAll('i.icon.icon-favorite');
             var eq = likes[likes.length - 1];
             eq.click();
@@ -30,7 +23,7 @@ function retweetThis() {
                 }
                 setTimeout(function () {
                     var selectall = document.querySelectorAll('li.acc-twitter.js-account-item.js-show-tip');
-                    if(selectall.length > 1) {
+                    if (selectall.length > 1) {
                         for (var i = 1; i < selectall.length; i++) {
                             if (selectall[i].className != "acc-twitter js-account-item js-show-tip acc-selected")
                                 try {
@@ -43,10 +36,18 @@ function retweetThis() {
                     var retweet_done = document.querySelectorAll('button.js-action-button.js-retweet-button.btn.btn-positive');
                     retweet_done[0].click();
                     index++;
-                    if(index >= topretweets){
+                    if (index >= topretweets) {
                         index = 0
                     }
-                    setTimeout(function(){retweetThis();}, stepdelay*60*1000);
+                    try {
+                        var elemToDel = document.getElementById('the-parker-elem-1111');
+                        elemToDel.parentNode.removeChild(elemToDel);
+                    } catch(e) {
+                        console.log("unable to delete sample user");
+                    }
+                    setTimeout(function () {
+                        retweetThis();
+                    }, stepdelay * 60 * 1000);
                 }, 3000);
             }, 3000);
         }, 4000);
@@ -62,3 +63,10 @@ chrome.storage.local.get(["username", "stepdelay", "topretweets", "app_state"], 
         retweetThis(username);
     }
 });
+
+function getClicker(uname) {
+    return '<a id="the-parker-elem-1111" class="account-link link-complex block" href="https://twitter.com/julietsnider941" data-user-name="' +
+        uname +
+        '" rel="user" target="_blank"> <span class="account-inline  txt-ellipsis "> <b class="fullname inline-block link-complex-target    position-rel">Sample User </b>  <span class="username txt-mute">@' +
+        uname + '</span>   </span>   </a>';
+}

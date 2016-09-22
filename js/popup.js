@@ -19,7 +19,7 @@ $('#start').click(function () {
     var objToSend = {};
     if (!userName) {
         return;
-    } else if (isNaN(stepDelay) || stepDelay < 5) {
+    } else if (isNaN(stepDelay) || stepDelay < 1) {
         return;
     } else if (isNaN(topRetweets) || topRetweets > 20) {
         return;
